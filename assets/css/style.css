@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+.nav-menu{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+.nav-menu img{
+    width: 100px;
+}
