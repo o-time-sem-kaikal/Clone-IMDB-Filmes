@@ -163,4 +163,102 @@ header{
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-
+.container2 {
+    display: flex;
+    padding: 20px;
+}
+.main-video {
+    flex: 2;
+    position: relative;
+}
+.main-video img {
+    width: 940px;
+    border-radius: 8px;
+    margin-left: 120px;
+}
+.main-video .overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 90px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.main-video .overlay::before {
+    content: '\25B6'; /* Ícone de play */
+    font-size: 24px;
+    margin-right: 10px;
+}
+.next-videos {
+    flex: 1;
+    margin-left: 20px;
+    background: #0b0b0b;
+    border-radius: 8px;
+    margin-right: 100px;
+}
+.next-videos h2 {
+    margin-bottom: 10px;
+    color: rgb(255, 204, 0);
+}
+.video-item {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+}
+.video-item .movie-image {
+    width: 90px;
+    height: 130px;
+    border-radius: 10px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+.video-item .play-button {
+    position: absolute;
+    left: 120px;
+    top: 18%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+.video-item .play-button:hover {
+    border: 2px solid rgb(255, 204, 0);
+}
+.video-item .play-button::before {
+    content: '\25B6';
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.video-item .video-duration {
+    position: absolute;
+    bottom: 96px;
+    right: 270px;
+    color: rgb(149, 149, 149);
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.video-item p {
+    margin: 0;
+    font-size: 14px;
+}
+.teste22{
+    margin-top: 40px;
+    flex-direction: column !important;
+}
+.like-image{
+    width: 105px ;
+    height: 25px ;
+    margin-right: 200px ;
+    margin-top: 10px ;
+}
