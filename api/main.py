@@ -3,7 +3,6 @@ from pydantic import BaseModel
 import uvicorn
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
-import json
 
 class Item(BaseModel):
     text: str #deixa o text required
@@ -54,6 +53,6 @@ async def getInfoTeste(id:int):
             raise HTTPException(status_code=response.status_code, detail="Imagem não encontrada")
         return response.json() #aqui eu vou tá recebendo no javascript como bytes senão usar o json.loads()
 
-
+# ainda está rodando local para testes
 if __name__ == "__main__":
     uvicorn.run(app, port=8000)
