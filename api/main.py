@@ -3,55 +3,65 @@ from pydantic import BaseModel
 import uvicorn
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional, Any
 
-class Item(BaseModel):
-    text: str #deixa o text required
-    price: float
 
-class MovieContent(BaseModel):
-    title: str
-    imgURL: str
-    rate: float
+class MovieOrTvShowUnit(BaseModel):
+    title: Optional[str]
+    imgURL: Optional[str]
+    rate: Optional[float]
+
+class MoviesTvShowResponse(BaseModel):
+    movies: list[MovieOrTvShowUnit]
+    tvShows: list[MovieOrTvShowUnit]
 
 app = FastAPI()
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://127.0.0.1:5500"],
     allow_credentials=True,
     allow_methods = ["*"],
     allow_headers = ["*"],
 )
-
-@app.get("/getMoviesAndTvContent/")
-async def getMoviesAndTvContent(first: int = 30):
-    async with httpx.AsyncClient() as clientAsync:
-        response = await clientAsync.get(
-            f"https://imdb8.p.rapidapi.com/title/v2/get-popular?first={first}&country=US&language=en-US", headers={
-                "x-rapidapi-key": "46c9b8bf22msh06c5ae5c58a4ad1p1d48edjsnb27791c7bbb3",
-                "x-rapidapi-host": "imdb8.p.rapidapi.com"
-            })
-        
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Erro na requisição da api IMDB")
-
-        return response.json()
-
-
 
 @app.get("/")
 def getData():
     return {"success": "API CARREGADA"}
 
 
-@app.get("/getInfo/{id}")
-async def getInfoTeste(id:int):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"https://jsonplaceholder.typicode.com/users/{id}")
+@app.get("/getMoviesAndTvContent/")
+async def getMoviesAndTvContent(first: int = 30) -> MoviesTvShowResponse:
+    async with httpx.AsyncClient() as clientAsync:
+        response = await clientAsync.get(
+            f"https://imdb8.p.rapidapi.com/title/v2/get-popular?first={first}&country=US&language=en-US", headers={
+                "x-rapidapi-key": "46c9b8bf22msh06c5ae5c58a4ad1p1d48edjsnb27791c7bbb3",
+                "x-rapidapi-host": "imdb8.p.rapidapi.com"
+            })
+
         if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Imagem não encontrada")
-        return response.json() #aqui eu vou tá recebendo no javascript como bytes senão usar o json.loads()
+            raise HTTPException(status_code=response.status_code, detail="Erro na requisição da api IMDB para filmes e séries!")
+
+        movies = [MovieOrTvShowUnit(title=filme.get("node").get("titleText", {}).get("text", "Titulo Desconhecido"), imgURL=filme.get("node").get("primaryImage", {}).get("url", "URL desconhecida"), rate= filme.get("node", {}).get("ratingsSummary", {}).get("aggregateRating", "Sem nota")) for filme in response.json()["data"]["movies"]["edges"]]
+        tvShows = [MovieOrTvShowUnit(title=filme.get("node").get("titleText", {}).get("text", "Titulo Desconhecido"), imgURL=filme.get("node").get("primaryImage", {}).get("url", "URL desconhecida"), rate= filme.get("node", {}).get("ratingsSummary", {}).get("aggregateRating", "Sem nota")) for filme in response.json()["data"]["tv"]["edges"]]
+
+        return MoviesTvShowResponse(movies=movies, tvShows=tvShows)
+
+@app.get("")
+async def getActors(first: int = 30):
+    async with httpx.AsyncClient() as clientAsync:
+        response = await clientAsync.get(
+            f"urlACTORS", headers={
+                "x-rapidapi-key": "46c9b8bf22msh06c5ae5c58a4ad1p1d48edjsnb27791c7bbb3",
+                "x-rapidapi-host": "imdb8.p.rapidapi.com"
+            })
+        
+        if response.status_code != 200:
+            return HTTPException(response.status_code, detail="Erro na requisição da api IMDB para atores!")
+
+        return response.json()
+
 
 # ainda está rodando local para testes
 if __name__ == "__main__":

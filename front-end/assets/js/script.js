@@ -9,17 +9,18 @@
 
 
 async function loadMovieAndTvContentFromAPI(){
-    const response = await fetch("http://127.0.0.1:8000/");
+    const response = await fetch("http://127.0.0.1:8000/getMoviesAndTvContent/");
 
     const responseObj = await response.json();
-    
-    console.log(responseObj);
 
     // Código para carregar o content dos .movies ou .tv no console
 
-    // Object.values(responseObj.data.movies.edges).forEach((movie) => {
-    //     console.log(movie.node.titleText.text);
-    // })
+    responseObj.movies.forEach(movie => {
+        console.log("Título do Filme:", movie.title);
+        console.log("URL da Imagem:", movie.imgURL);
+        console.log("Avaliação: ", movie.rate);
+        console.log("")
+    })
 }
 
 loadMovieAndTvContentFromAPI();
