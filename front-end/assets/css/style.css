@@ -8,6 +8,7 @@ body{
     background-color: black;
     color: white;
     font-family: "Roboto", sans-serif;
+    padding: 10px;
 }
 header{
     font-size: 16px;
@@ -263,6 +264,14 @@ header{
     font-size: 25px;
 }
 .slider{
+    display: flex;
+    justify-content: left;
+    overflow-x: hidden;
+    width: 90vw;
+    position: relative;
+}
+
+.slider-fans-favorite {
     display: flex;
     justify-content: left;
     overflow-x: hidden;

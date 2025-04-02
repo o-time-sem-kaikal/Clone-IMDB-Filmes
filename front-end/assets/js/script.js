@@ -87,30 +87,68 @@ async function sendContentToIndex(){
     })
 }
 
+async function sendContentToIndex2(){
+    const dados = await loadMovieAndTvContentFromAPI();
+
+    dados.movies.forEach(movie => {
+
+        const divSlide = document.createElement("div");
+        divSlide.classList.add("slide-fans-favorite");
+
+        const imgSlide = document.createElement("img");
+        imgSlide.classList.add("slide-img-fans-favorite");
+        imgSlide.alt = `Imagem do filme ${movie.title}`;
+        imgSlide.src = movie.imgURL;
+
+        const rateText = document.createElement("p");
+
+        rateText.classList.add("slide-rate-fans-favorite");
+        if(!(movie.rate === null))
+            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>${movie.rate}</span><span class="star-span"><i class="bi bi-star"></i></span>`;
+        else
+            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>Sem Avaliação</span><span class="star-span"><i class="bi bi-star"></i></span>`;
+
+        const movieTitle = document.createElement("h1");
+        movieTitle.classList.add("slide-movie-title-fans-favorite");
+        movieTitle.textContent = movie.title;
+
+
+        const btnPlus = document.createElement("button");
+        btnPlus.classList.add("slide-btn-list-fans-favorite");
+        btnPlus.innerHTML = '<i class="bi bi-plus"></i>Lista';
+
+
+        const btnTrailer = document.createElement("button");
+        btnTrailer.classList.add("slide-btn-trailer-fans-favorite");
+
+        btnTrailer.innerHTML = '<i class="bi bi-caret-right-fill"></i>Trailer';
+
+        divSlide.appendChild(imgSlide);
+        divSlide.appendChild(rateText);
+        divSlide.appendChild(movieTitle);
+        divSlide.appendChild(btnPlus);
+        divSlide.appendChild(btnTrailer);
+
+        document.querySelector(".slider-fans-favorite").appendChild(divSlide);
+    })
+}
+
+
 document.addEventListener("DOMContentLoaded", sendContentToIndex);
+document.addEventListener("DOMContentLoaded", sendContentToIndex2);
 
-// // url para imagens e nomes
-// const url = 'https://imdb8.p.rapidapi.com/actors/v2/get-images?nconst=nm0974575&first=1';
 
-// //url para born today
-
-// const url2 = 'https://imdb8.p.rapidapi.com/actors/v2/get-born-today?today=03-15&first=20&country=US&language=en-US';
-
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'x-rapidapi-key': '46c9b8bf22msh06c5ae5c58a4ad1p1d48edjsnb27791c7bbb3',
-// 		'x-rapidapi-host': 'imdb8.p.rapidapi.com'
-// 	}
-// };
-
-// fetch(url, options)
-// .then(response => response.json())
 function scrollSlider(value) {
-    document.querySelector(".slider").scrollLeft += value;
+    document.querySelector(".slider").scrollTo({
+        left:document.querySelector(".slider").scrollLeft + value,
+        behavior:"smooth"
+    });
 }
 function scrollSlider1(value) {
-    document.querySelector(".slider-fans-favorite").scrollLeft += value;
+    document.querySelector(".slider-fans-favorite").scrollTo({
+        left: document.querySelector(".slider-fans-favorite").scrollLeft + value,
+        behavior: "smooth"
+    });
 }// .then(data => {
 //     console.log(data)
 // })

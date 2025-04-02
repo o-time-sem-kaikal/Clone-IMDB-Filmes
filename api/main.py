@@ -4,7 +4,7 @@ import uvicorn
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, Any
-
+import json
 
 class MovieOrTvShowUnit(BaseModel):
     title: Optional[str]
@@ -40,6 +40,8 @@ async def getMoviesAndTvContent(first: int = 30) -> MoviesTvShowResponse:
                 "x-rapidapi-host": "imdb8.p.rapidapi.com"
             })
 
+
+
         if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail="Erro na requisição da api IMDB para filmes e séries!")
 
@@ -47,6 +49,8 @@ async def getMoviesAndTvContent(first: int = 30) -> MoviesTvShowResponse:
         tvShows = [MovieOrTvShowUnit(title=filme.get("node").get("titleText", {}).get("text", "Titulo Desconhecido"), imgURL=filme.get("node").get("primaryImage", {}).get("url", "URL desconhecida"), rate= filme.get("node", {}).get("ratingsSummary", {}).get("aggregateRating", "Sem nota")) for filme in response.json()["data"]["tv"]["edges"]]
 
         return MoviesTvShowResponse(movies=movies, tvShows=tvShows)
+
+
 
 @app.get("")
 async def getActors(first: int = 30):
