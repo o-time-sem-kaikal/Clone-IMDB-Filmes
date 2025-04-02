@@ -57,8 +57,11 @@ async function sendContentToIndex(){
 
         const rateText = document.createElement("p");
         rateText.classList.add("slide-rate");
+        if(!(movie.rate === null))
+            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>${movie.rate}</span><span class="star-span"><i class="bi bi-star"></i></span>`;
+        else
+            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>Sem Avaliação</span><span class="star-span"><i class="bi bi-star"></i></span>`;
 
-        rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>${movie.rate}</span><span class="star-span"><i class="bi bi-star"></i></span>`;
 
         const movieTitle = document.createElement("h1");
         movieTitle.classList.add("slide-movie-title");
@@ -103,15 +106,14 @@ document.addEventListener("DOMContentLoaded", sendContentToIndex);
 
 // fetch(url, options)
 // .then(response => response.json())
-// .then(data => {
-//     console.log(data)
-// })
-// .catch(error =>{
-//     console.error(error);
-// })
 function scrollSlider(value) {
     document.querySelector(".slider").scrollLeft += value;
 }
 function scrollSlider1(value) {
     document.querySelector(".slider-fans-favorite").scrollLeft += value;
-}
+}// .then(data => {
+//     console.log(data)
+// })
+// .catch(error =>{
+//     console.error(error);
+// })
