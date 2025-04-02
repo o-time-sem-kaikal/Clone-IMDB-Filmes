@@ -149,6 +149,12 @@ function scrollSlider1(value) {
         left: document.querySelector(".slider-fans-favorite").scrollLeft + value,
         behavior: "smooth"
     });
+}
+function scrollSlider2(value) {
+    document.querySelector(".slider-borned").scrollTo({
+        left: document.querySelector(".slider-borned").scrollLeft + value,
+        behavior: "smooth"
+    });
 }// .then(data => {
 //     console.log(data)
 // })
