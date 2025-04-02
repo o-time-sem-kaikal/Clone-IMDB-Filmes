@@ -36,8 +36,8 @@ async def getMoviesAndTvContent(first: int = 30) -> MoviesTvShowResponse:
     async with httpx.AsyncClient() as clientAsync:
         response = await clientAsync.get(
             f"https://imdb8.p.rapidapi.com/title/v2/get-popular?first={first}&country=US&language=en-US", headers={
-                "x-rapidapi-key": "46c9b8bf22msh06c5ae5c58a4ad1p1d48edjsnb27791c7bbb3",
-                "x-rapidapi-host": "imdb8.p.rapidapi.com"
+                'x-rapidapi-key': '49ebdfd584msh130c134b91ffe06p1e9d60jsn03b967d686f4',
+		        'x-rapidapi-host': 'imdb8.p.rapidapi.com'
             })
 
 

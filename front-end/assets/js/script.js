@@ -84,33 +84,30 @@ async function sendContentToIndex(){
         divSlide.appendChild(btnTrailer);
 
         document.querySelector(".slider").appendChild(divSlide);
-    })
-}
+    }
+)
 
-async function sendContentToIndex2(){
-    const dados = await loadMovieAndTvContentFromAPI();
-
-    dados.movies.forEach(movie => {
+    dados.tvShows.forEach(show => {
 
         const divSlide = document.createElement("div");
         divSlide.classList.add("slide-fans-favorite");
 
         const imgSlide = document.createElement("img");
         imgSlide.classList.add("slide-img-fans-favorite");
-        imgSlide.alt = `Imagem do filme ${movie.title}`;
-        imgSlide.src = movie.imgURL;
+        imgSlide.alt = `Imagem do filme ${show.title}`;
+        imgSlide.src = show.imgURL;
 
         const rateText = document.createElement("p");
 
         rateText.classList.add("slide-rate-fans-favorite");
-        if(!(movie.rate === null))
-            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>${movie.rate}</span><span class="star-span"><i class="bi bi-star"></i></span>`;
+        if(!(show.rate === null))
+            rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>${show.rate}</span><span class="star-span"><i class="bi bi-star"></i></span>`;
         else
             rateText.innerHTML = `<i class="bi bi-star-fill"></i><span>Sem Avaliação</span><span class="star-span"><i class="bi bi-star"></i></span>`;
 
         const movieTitle = document.createElement("h1");
         movieTitle.classList.add("slide-movie-title-fans-favorite");
-        movieTitle.textContent = movie.title;
+        movieTitle.textContent = show.title;
 
 
         const btnPlus = document.createElement("button");
@@ -133,9 +130,8 @@ async function sendContentToIndex2(){
     })
 }
 
-
 document.addEventListener("DOMContentLoaded", sendContentToIndex);
-document.addEventListener("DOMContentLoaded", sendContentToIndex2);
+
 
 
 function scrollSlider(value) {
