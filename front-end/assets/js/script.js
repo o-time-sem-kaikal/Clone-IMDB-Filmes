@@ -109,3 +109,9 @@ document.addEventListener("DOMContentLoaded", sendContentToIndex);
 // .catch(error =>{
 //     console.error(error);
 // })
+function scrollSlider(value) {
+    document.querySelector(".slider").scrollLeft += value;
+}
+function scrollSlider1(value) {
+    document.querySelector(".slider-fans-favorite").scrollLeft += value;
+}

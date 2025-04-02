@@ -91,7 +91,8 @@
             </div>
         </section>
         <section class="top-ten">
-            <h1>Top 10 no IMDb esta semana</h1>
+            <h1 class="top-ten-tittle">Top 10 no IMDb esta semana</h1>
+            <button class="prev" onclick="scrollSlider(-300)">&#10094;</button>
             <div class="slider">
                 <div class="slide">
                     <img class="slide-img" src="https://m.media-amazon.com/images/M/MV5BYThiN2M0NTItODRmNC00NDhlLWFiYTgtMWM2YTEyYzI3ZTY1XkEyXkFqcGc@._V1_.jpg">
@@ -100,14 +101,25 @@
                     <button class="slide-btn-list"><i class="bi bi-plus"></i>Lista</button>
                     <button class="slide-btn-trailer"><i class="bi bi-caret-right-fill"></i>Trailer</button>
                 </div>
-                <div class="slide">
-                    <img class="slide-img" src="https://m.media-amazon.com/images/M/MV5BYThiN2M0NTItODRmNC00NDhlLWFiYTgtMWM2YTEyYzI3ZTY1XkEyXkFqcGc@._V1_.jpg">
-                    <p class="slide-rate"><i class="bi bi-star-fill"></i><span>5.0</span><span class="star-span"><i class="bi bi-star"></i></span></p>
-                    <h1 class="slide-movie-title">3. Anora</h1>
-                    <button class="slide-btn-list"><i class="bi bi-plus"></i>Lista</button>
-                    <button class="slide-btn-trailer"><i class="bi bi-caret-right-fill"></i>Trailer</button>
-                </div>
+                
             </div>
+            <button class="next" onclick="scrollSlider(300)">&#10095;</button>
+        </section>
+        <section class="fans-favorite">
+            <h1 class="fans-favorite-tittle">Favoritos dos Fãs</h1>
+            <p class="fans-favorite-subtittle">Principai filmes e series da semana</p>
+            <button class="prev" onclick="scrollSlider1(-300)">&#10094;</button>
+            <div class="slider-fans-favorite">
+                <div class="slide-fans-favorite">
+                    <img class="slide-img-fans-favorite" src="https://m.media-amazon.com/images/M/MV5BYThiN2M0NTItODRmNC00NDhlLWFiYTgtMWM2YTEyYzI3ZTY1XkEyXkFqcGc@._V1_.jpg">
+                    <p class="slide-rate-fans-favorite"><i class="bi bi-star-fill"></i><span>5.0</span><span class="star-span"><i class="bi bi-star"></i></span></p>
+                    <h1 class="slide-movie-title-fans-favorite">3. Anora</h1>
+                    <button class="slide-btn-list-fans-favorite"><i class="bi bi-plus"></i>Lista</button>
+                    <button class="slide-btn-trailer-fans-favorite"><i class="bi bi-caret-right-fill"></i>Trailer</button>
+                </div>
+                
+            </div>
+            <button class="next" onclick="scrollSlider1(300)">&#10095;</button>
         </section>
     </main>
     <footer></footer>
